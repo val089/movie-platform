@@ -3,7 +3,7 @@ import { Center, Heading } from '@chakra-ui/react';
 import { api, endpoints } from 'api';
 
 export const HomeScreen = () => {
-  const [media, setMedia] = useState([]);
+  // const [media, setMedia] = useState([]);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
