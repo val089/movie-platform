@@ -1,4 +1,3 @@
-import React from 'react';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { useColorMode, IconButton } from '@chakra-ui/react';
 
@@ -12,6 +11,7 @@ export const ColorModeToggle = ({
   variant = 'outline',
   colorScheme = 'cyan',
   size = 'md',
+  ...props
 }: Props) => {
   const { colorMode, toggleColorMode } = useColorMode();
 
@@ -24,6 +24,7 @@ export const ColorModeToggle = ({
       variant={variant}
       colorScheme={colorScheme}
       size={size}
+      {...props}
     />
   );
 };
