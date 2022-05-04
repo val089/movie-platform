@@ -6,6 +6,7 @@ import { InputField } from 'components/InputField';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useAuth } from 'hooks/useAuth';
 import { authScheme } from 'utils/zodValidators';
+import { useNavigate } from 'react-router-dom';
 
 export type LoginFormFields = {
   username: string;
@@ -22,15 +23,20 @@ export const LoginPage = () => {
     resolver: zodResolver(authScheme),
   });
 
+  const navigate = useNavigate();
+
   const onSubmit: SubmitHandler<LoginFormFields> = (data: LoginFormFields) => {
     console.log(data);
     // const { username, password } = data;
     signIn(data);
+    navigate('/home');
   };
 
   return (
     <Center h="100vh">
-      <ColorModeToggle />
+      <Box position="absolute" right={5} top={5}>
+        <ColorModeToggle />
+      </Box>
       <Stack boxShadow="lg" p="10" rounded="md">
         <Heading as="h1" textAlign="center">
           Welcome in React Platfrom

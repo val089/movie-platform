@@ -2,7 +2,7 @@ import { useContext, useState, createContext } from 'react';
 import { api, endpoints } from 'api';
 import type { LoginFormFields } from '../views/LoginPage/index';
 
-interface User {
+export type User = {
   Username: string;
   Password: string;
   Device: {
@@ -11,7 +11,7 @@ interface User {
     FirebaseToken: string;
     DpiCode: string;
   };
-}
+};
 
 export interface AuthCtx {
   user: User | null;
