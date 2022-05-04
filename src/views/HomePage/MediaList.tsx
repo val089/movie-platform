@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import { Center, Heading, Box, Flex } from '@chakra-ui/react';
+import { Center, Heading, Flex } from '@chakra-ui/react';
 
 type MediaItem = {
   Id: number;

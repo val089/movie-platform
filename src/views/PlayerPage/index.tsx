@@ -1,5 +1,5 @@
 import { Center } from '@chakra-ui/react';
-import ReactPlayer from 'react-player';
+// import ReactPlayer from 'react-player';
 
 export const PlayerPage = () => {
   return (

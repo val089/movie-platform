@@ -1,4 +1,3 @@
-import React from 'react';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { useColorMode, IconButton } from '@chakra-ui/react';
 
