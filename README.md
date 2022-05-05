@@ -4,6 +4,8 @@
 
 ![screen02](https://user-images.githubusercontent.com/30775271/166982495-c0dee99f-fc09-4b31-b419-f8c9e866a385.JPG)
 
+![screen03](https://user-images.githubusercontent.com/30775271/166982728-ef1b845d-77b1-43bd-b60d-b80680937c28.JPG)
+
 
 ## Technologies
 
@@ -24,4 +26,5 @@
 1. `npm run start`
 
 Runs the app in the development mode.
+
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
