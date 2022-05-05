@@ -1,4 +1,6 @@
 import { Center, Heading, Flex } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
+import { api, endpoints } from 'api';
 
 type MediaItem = {
   Id: number;
@@ -40,34 +42,29 @@ interface MediaListProps {
 }
 
 export const MediaList = ({ data }: MediaListProps) => {
-  //   console.log(data?.Entities);
+  const navigate = useNavigate();
 
   return (
     <Center pt={100}>
       <Flex flexWrap="wrap" justifyContent="center" maxW={1000} m="0 auto">
         {data &&
-          data.Entities.map((item) => {
-            console.log(item);
-            return (
-              <Center
-                cursor="pointer"
-                key={item.Id}
-                p={5}
-                m={5}
-                maxW="sm"
-                borderWidth="1px"
-                borderRadius="lg"
-                w={200}
-                onClick={() => {
-                  /* Play video*/
-                }}
-              >
-                <Heading as="h2" fontSize="md">
-                  {item.Title}
-                </Heading>
-              </Center>
-            );
-          })}
+          data.Entities.map((item) => (
+            <Center
+              cursor="pointer"
+              key={item.Id}
+              p={5}
+              m={5}
+              maxW="sm"
+              borderWidth="1px"
+              borderRadius="lg"
+              w={200}
+              onClick={() => navigate(`/player/${item.Id}`)}
+            >
+              <Heading as="h2" fontSize="md">
+                {item.Title}
+              </Heading>
+            </Center>
+          ))}
       </Flex>
     </Center>
   );

@@ -1,12 +1,13 @@
+import { useNavigate } from 'react-router-dom';
+import { useForm, SubmitHandler } from 'react-hook-form';
+
 import { AtSignIcon, LockIcon } from '@chakra-ui/icons';
 import { Center, Stack, Heading, Text, Button, Box } from '@chakra-ui/react';
-import { useForm, SubmitHandler } from 'react-hook-form';
 import { ColorModeToggle } from 'components/ColorModeToggle';
 import { InputField } from 'components/InputField';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useAuth } from 'hooks/useAuth';
 import { authScheme } from 'utils/zodValidators';
-import { useNavigate } from 'react-router-dom';
 
 export type LoginFormFields = {
   username: string;
@@ -25,10 +26,15 @@ export const LoginPage = () => {
 
   const navigate = useNavigate();
 
-  const onSubmit: SubmitHandler<LoginFormFields> = (data: LoginFormFields) => {
-    console.log(data);
-    // const { username, password } = data;
-    signIn(data);
+  const onSubmit: SubmitHandler<LoginFormFields> = async (
+    data: LoginFormFields
+  ) => {
+    await signIn(data);
+    navigate('/home');
+  };
+
+  const loginAnonymously = async () => {
+    await goWithoutLogin();
     navigate('/home');
   };
 
@@ -79,7 +85,11 @@ export const LoginPage = () => {
         </Box>
 
         <Stack justify="center" spacing="3">
-          <Button colorScheme="purple" variant="link" onClick={goWithoutLogin}>
+          <Button
+            colorScheme="purple"
+            variant="link"
+            onClick={loginAnonymously}
+          >
             Go without Sign In
           </Button>
         </Stack>

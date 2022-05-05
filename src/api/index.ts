@@ -7,4 +7,5 @@ export const api = axios.create({
 export const endpoints = {
   login: 'Authorization/SignIn/',
   media: 'Media/GetMediaList/',
+  mediaPlayInfo: 'Media/GetMediaPlayInfo/',
 };
