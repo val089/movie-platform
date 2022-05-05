@@ -11,7 +11,7 @@
 - [Axios](https://axios-http.com/)
 
 ## Installation
-1. [Clone this repo.](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
+1. Clone this repo.
 2. `npm install`
 
 ## How to run (dev mode)
