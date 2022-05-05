@@ -1,4 +1,4 @@
-import { useContext, useState, createContext } from 'react';
+import { useContext, useState, createContext, useEffect } from 'react';
 import { api, endpoints } from 'api';
 import type { LoginFormFields } from '../views/LoginPage/index';
 
@@ -16,7 +16,7 @@ export type User = {
 export interface AuthCtx {
   user: User | null;
   signIn: ({ username, password }: LoginFormFields) => void;
-  signOut: () => void;
+  logout: () => void;
   goWithoutLogin: () => void;
 }
 
@@ -29,13 +29,35 @@ interface AuthProviderProps {
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState(null);
 
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      (async () => {
+        try {
+          const response = await api.post(
+            endpoints.login,
+            { username: 'test@bsgroup.eu', password: 'Test12!@' },
+            {
+              headers: {
+                authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          setUser(response.data.User);
+        } catch (e) {
+          console.log(e);
+        }
+      })();
+    }
+  }, []);
+
   const signIn = async ({ username, password }: LoginFormFields) => {
     try {
       const response = await api.post(endpoints.login, {
         username,
         password,
       });
-      setUser(response.data);
+      setUser(response.data.User);
       localStorage.setItem('token', response.data.AuthorizationToken.Token);
     } catch (e) {
       console.log('error');
@@ -57,13 +79,13 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   };
 
-  const signOut = () => {
+  const logout = () => {
     setUser(null);
     localStorage.removeItem('token');
   };
 
   return (
-    <AuthContext.Provider value={{ user, signIn, signOut, goWithoutLogin }}>
+    <AuthContext.Provider value={{ user, signIn, logout, goWithoutLogin }}>
       {children}
     </AuthContext.Provider>
   );

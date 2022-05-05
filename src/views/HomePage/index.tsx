@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Center, Spinner, Box } from '@chakra-ui/react';
+import { Center, Spinner, useToast } from '@chakra-ui/react';
 import { api, endpoints } from 'api';
 
-import { ColorModeToggle } from 'components/ColorModeToggle';
 import { MediaList } from './MediaList';
 import type { MediaListData } from './MediaList';
 
@@ -18,6 +17,7 @@ const data = {
 export const HomePage = () => {
   const [mediaList, setMediaList] = useState<MediaListData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const toast = useToast();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -32,17 +32,18 @@ export const HomePage = () => {
           setMediaList(response.data);
           setIsLoading(false);
         } catch (e) {
-          console.log(e);
+          toast({
+            title: `Something went wrong, please refresh website`,
+            status: 'error',
+            isClosable: true,
+          });
         }
       })();
     }
   }, []);
 
   return (
-    <Center minHeight="100vh">
-      <Box position="absolute" right={5} top={5}>
-        <ColorModeToggle />
-      </Box>
+    <Center minH="100vh">
       {isLoading ? <Spinner /> : <MediaList data={mediaList} />}
     </Center>
   );

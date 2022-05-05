@@ -3,7 +3,6 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { AtSignIcon, LockIcon } from '@chakra-ui/icons';
 import { Center, Stack, Heading, Text, Button, Box } from '@chakra-ui/react';
-import { ColorModeToggle } from 'components/ColorModeToggle';
 import { InputField } from 'components/InputField';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useAuth } from 'hooks/useAuth';
@@ -15,7 +14,13 @@ export type LoginFormFields = {
 };
 
 export const LoginPage = () => {
-  const { signIn, goWithoutLogin } = useAuth();
+  const { signIn, goWithoutLogin, user } = useAuth();
+  const navigate = useNavigate();
+
+  if (user) {
+    navigate('/home');
+  }
+
   const {
     register,
     handleSubmit,
@@ -23,8 +28,6 @@ export const LoginPage = () => {
   } = useForm<LoginFormFields>({
     resolver: zodResolver(authScheme),
   });
-
-  const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<LoginFormFields> = async (
     data: LoginFormFields
@@ -40,10 +43,7 @@ export const LoginPage = () => {
 
   return (
     <Center h="100vh">
-      <Box position="absolute" right={5} top={5}>
-        <ColorModeToggle />
-      </Box>
-      <Stack boxShadow="lg" p="10" rounded="md">
+      <Stack p="10">
         <Heading as="h1" textAlign="center">
           Welcome in React Platfrom
         </Heading>
@@ -89,6 +89,7 @@ export const LoginPage = () => {
             colorScheme="purple"
             variant="link"
             onClick={loginAnonymously}
+            p={2}
           >
             Go without Sign In
           </Button>
