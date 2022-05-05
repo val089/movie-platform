@@ -1,6 +1,5 @@
 import { Center, Heading, Flex } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import { api, endpoints } from 'api';
 
 type MediaItem = {
   Id: number;
@@ -45,7 +44,7 @@ export const MediaList = ({ data }: MediaListProps) => {
   const navigate = useNavigate();
 
   return (
-    <Center pt={100}>
+    <>
       <Flex flexWrap="wrap" justifyContent="center" maxW={1000} m="0 auto">
         {data &&
           data.Entities.map((item) => (
@@ -66,6 +65,6 @@ export const MediaList = ({ data }: MediaListProps) => {
             </Center>
           ))}
       </Flex>
-    </Center>
+    </>
   );
 };
