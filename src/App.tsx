@@ -1,23 +1,22 @@
-import * as React from 'react';
-import {
-  ChakraProvider,
-  Box,
-  Text,
-  VStack,
-  Grid,
-  theme,
-} from '@chakra-ui/react';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
+import { Routes, Route } from 'react-router-dom';
 
-export const App = () => (
-  <ChakraProvider theme={theme}>
-    <Box textAlign="center" fontSize="xl">
-      <Grid minH="100vh" p={3}>
-        <ColorModeSwitcher justifySelf="flex-end" />
-        <VStack spacing={8}>
-          <Text>HELLO</Text>
-        </VStack>
-      </Grid>
-    </Box>
-  </ChakraProvider>
-);
+import { Header } from 'views/Header';
+import { LoginPage } from 'views/LoginPage';
+import { HomePage } from 'views/HomePage';
+import { PlayerPage } from 'views/PlayerPage';
+import { ProtectedRoute } from 'components/ProtectedRoute';
+
+export const App = () => {
+  return (
+    <>
+      <Header />
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="home" element={<HomePage />} />
+          <Route path="player/:movieId" element={<PlayerPage />} />
+        </Route>
+      </Routes>
+    </>
+  );
+};

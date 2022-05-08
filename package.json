@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@chakra-ui/icons": "^1.1.7",
     "@chakra-ui/react": "^1.8.8",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
+    "@hookform/resolvers": "^2.8.8",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^10.4.9",
     "@testing-library/user-event": "^12.8.3",
@@ -13,13 +15,18 @@
     "@types/node": "^12.20.50",
     "@types/react": "^16.14.25",
     "@types/react-dom": "^16.9.15",
+    "axios": "^0.27.2",
     "framer-motion": "^4.1.17",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-hook-form": "^7.30.0",
     "react-icons": "^3.11.0",
+    "react-player": "^2.10.0",
+    "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "typescript": "^4.6.4",
-    "web-vitals": "^0.2.4"
+    "web-vitals": "^0.2.4",
+    "zod": "^3.14.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -30,7 +37,7 @@
     "check-format": "prettier --check .",
     "check-lint": "eslint . --ext ts --ext tsx --ext js",
     "format": "prettier --write .",
-    "test-all": "yarn check-format && yarn check-lint && yarn check-types",
+    "test-all": "npm check-format && npm check-lint && npm check-types",
     "prepare": "husky install"
   },
   "eslintConfig": {
@@ -59,8 +66,8 @@
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.5.0",
     "husky": "^7.0.0",
-    "prettier": "^2.6.2",
-    "lint-staged": "^12.4.1"
+    "lint-staged": "^12.4.1",
+    "prettier": "^2.6.2"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "eslint --fix",
