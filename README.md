@@ -1,4 +1,4 @@
-# Recruitment Task - BSG
+# Movie Platform
 
 ![screen01](https://user-images.githubusercontent.com/30775271/166982304-8d0a790b-5048-4330-a042-c9581f109efd.JPG)
 
