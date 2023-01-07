@@ -6,7 +6,6 @@
 
 ![screen03](https://user-images.githubusercontent.com/30775271/166982728-ef1b845d-77b1-43bd-b60d-b80680937c28.JPG)
 
-
 ## Technologies
 
 - [React](https://reactjs.org/)
@@ -18,6 +17,7 @@
 - [Axios](https://axios-http.com/)
 
 ## Installation
+
 1. Clone this repo.
 2. `npm install`
 

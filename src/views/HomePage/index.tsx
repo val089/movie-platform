@@ -15,36 +15,37 @@ const data = {
 };
 
 export const HomePage = () => {
-  const [mediaList, setMediaList] = useState<MediaListData | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const toast = useToast();
+  // const [mediaList, setMediaList] = useState<MediaListData | null>(null);
+  // const [isLoading, setIsLoading] = useState(true);
+  // const toast = useToast();
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      (async () => {
-        try {
-          const response = await api.post(endpoints.media, data, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-          setMediaList(response.data);
-          setIsLoading(false);
-        } catch (e) {
-          toast({
-            title: `Something went wrong, please refresh website`,
-            status: 'error',
-            isClosable: true,
-          });
-        }
-      })();
-    }
-  }, []);
+  // useEffect(() => {
+  //   const token = localStorage.getItem('token');
+  //   if (token) {
+  //     (async () => {
+  //       try {
+  //         const response = await api.post(endpoints.media, data, {
+  //           headers: {
+  //             Authorization: `Bearer ${token}`,
+  //           },
+  //         });
+  //         setMediaList(response.data);
+  //         setIsLoading(false);
+  //       } catch (e) {
+  //         toast({
+  //           title: `Something went wrong, please refresh website`,
+  //           status: 'error',
+  //           isClosable: true,
+  //         });
+  //       }
+  //     })();
+  //   }
+  // }, []);
 
   return (
     <Center minH="100vh">
-      {isLoading ? <Spinner /> : <MediaList data={mediaList} />}
+      {/* {isLoading ? <Spinner /> : <MediaList data={mediaList} />} */}
+      <h1>Hello!</h1>
     </Center>
   );
 };

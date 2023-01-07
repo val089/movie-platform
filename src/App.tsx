@@ -5,11 +5,13 @@ import { LoginPage } from 'views/LoginPage';
 import { HomePage } from 'views/HomePage';
 import { PlayerPage } from 'views/PlayerPage';
 import { ProtectedRoute } from 'components/ProtectedRoute';
+import { useAuth } from 'hooks/useAuth';
 
 export const App = () => {
+  const { isAuthenticated } = useAuth();
   return (
     <>
-      <Header />
+      {isAuthenticated && <Header />}
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route element={<ProtectedRoute />}>

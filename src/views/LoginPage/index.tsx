@@ -1,12 +1,22 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { AtSignIcon, LockIcon } from '@chakra-ui/icons';
-import { Center, Stack, Heading, Text, Button, Box } from '@chakra-ui/react';
+import {
+  Center,
+  Stack,
+  Heading,
+  Text,
+  Button,
+  Box,
+  useToast,
+} from '@chakra-ui/react';
 import { InputField } from 'components/InputField';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useAuth } from 'hooks/useAuth';
 import { authScheme } from 'utils/zodValidators';
+import { login } from 'utils/authByFirebase';
 
 export type LoginFormFields = {
   username: string;
@@ -14,12 +24,10 @@ export type LoginFormFields = {
 };
 
 export const LoginPage = () => {
-  const { signIn, goWithoutLogin, user } = useAuth();
+  const [isAuthenticating, setIsAuthenticating] = useState(false);
+  const { authenticate } = useAuth();
   const navigate = useNavigate();
-
-  if (user) {
-    navigate('/home');
-  }
+  const toast = useToast();
 
   const {
     register,
@@ -32,14 +40,26 @@ export const LoginPage = () => {
   const onSubmit: SubmitHandler<LoginFormFields> = async (
     data: LoginFormFields
   ) => {
-    await signIn(data);
-    navigate('/home');
+    setIsAuthenticating(true);
+    try {
+      const token = await login(data.username, data.password);
+      if (token) {
+        authenticate(token);
+      }
+      navigate('/home');
+    } catch (error) {
+      setIsAuthenticating(false);
+      toast({
+        title: `Something went wrong, please try again`,
+        status: 'error',
+        isClosable: true,
+      });
+    }
   };
 
-  const loginAnonymously = async () => {
-    await goWithoutLogin();
-    navigate('/home');
-  };
+  if (isAuthenticating) {
+    return <h1>Logging you in...</h1>;
+  }
 
   return (
     <Center h="100vh">
@@ -83,12 +103,11 @@ export const LoginPage = () => {
             </Button>
           </Stack>
         </Box>
-
         <Stack justify="center" spacing="3">
           <Button
             colorScheme="purple"
             variant="link"
-            onClick={loginAnonymously}
+            onClick={() => navigate('/home')}
             p={2}
           >
             Go without Sign In
